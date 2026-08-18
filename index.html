@@ -108,6 +108,142 @@
     <h2>Documenting my journey through life, at my own pace.</h2>
 </div>
 
+    <div class="update-box">
+        <span class="date">August 12, 2026</span>
+        <h2>Near total Solar Eclipse anyone???</h2>
+<div class="eclipse-slider">
+  <!-- Background Image (Eclipse Peak) -->
+  <img src="eclipse2.webp" alt="Solar Eclipse Peak">
+  
+  <!-- Foreground Image Container (Before Peak) -->
+  <div class="foreground-img">
+    <img src="eclipse1.webp" alt="Solar Eclipse Before Peak">
+  </div>
+  
+  <!-- Interactive Range Slider -->
+  <input type="range" min="0" max="100" value="50" class="slider" aria-label="Eclipse progress slider">
+  
+  <!-- Visual Slider Line and Button -->
+  <div class="slider-button"></div>
+</div>
+
+<style>
+.eclipse-slider {
+  position: relative;
+  width: 100%;
+  max-width: 450px; /* Tailored maximum width for vertical 1064x2531 images */
+  margin: 0 auto;
+  overflow: hidden;
+  aspect-ratio: 1064 / 2531; /* Matches your exact WEBP aspect ratio */
+  background-color: #000000;
+}
+
+.eclipse-slider img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+}
+
+.foreground-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%; /* Initial middle position */
+  height: 100%;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.foreground-img img {
+  width: 450px; /* Must match the max-width of .eclipse-slider */
+  max-width: none;
+}
+
+/* Invisible range input overlaid on top to capture drag/swipe gestures */
+.slider {
+  position: absolute;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  opacity: 0;
+  z-index: 4;
+  cursor: ew-resize;
+  margin: 0;
+  top: 0;
+  left: 0;
+}
+
+/* Visual vertical divider line */
+.slider-button {
+  position: absolute;
+  top: 0;
+  left: 50%; 
+  width: 3px;
+  height: 100%;
+  background: #ffffff;
+  z-index: 3;
+  pointer-events: none;
+  transform: translateX(-50%);
+  box-shadow: 0 0 4px rgba(0,0,0,0.5);
+}
+
+/* Visual circular handle in the center of the divider */
+.slider-button::after {
+  content: "↔";
+  color: #000000;
+  font-weight: bold;
+  text-align: center;
+  line-height: 36px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 36px;
+  height: 36px;
+  background: #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.6);
+  font-size: 16px;
+}
+</style>
+
+<script>
+const slider = document.querySelector('.slider');
+const foregroundImg = document.querySelector('.foreground-img');
+const sliderButton = document.querySelector('.slider-button');
+const container = document.querySelector('.eclipse-slider');
+const foregroundImageEl = foregroundImg.querySelector('img');
+
+function updateSlider() {
+  const sliderPos = slider.value;
+  foregroundImg.style.width = `${sliderPos}%`;
+  sliderButton.style.left = `${sliderPos}%`;
+}
+
+// Ensures the hidden sliding layer changes scale smoothly on mobile/desktop resizing
+function syncResponsiveSizes() {
+  const containerWidth = container.offsetWidth;
+  foregroundImageEl.style.width = `${containerWidth}px`;
+}
+
+slider.addEventListener('input', updateSlider);
+window.addEventListener('resize', syncResponsiveSizes);
+
+// Run initial configurations
+syncResponsiveSizes();
+updateSlider();
+</script>
+    </div>
+    
+
+        
 <div class="update-box">
     <span class="date">July 30, 2026</span>
     <h2>South, To Granada!</h2>
